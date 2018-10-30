@@ -14,7 +14,6 @@ const Zinc = {
     //then i want to go through each of the components and render each one given those values. 
     
     function renderTemplate (templateFile, data) {
-        console.log('3. renderTemplate is called')
         return fetch (templateFile+'.html')
         .then ( res => res.text())
         .then (html => html.replace(/\{\{\s*(.*?)\s*\}\}/g, (match, variable) => 
@@ -22,7 +21,6 @@ const Zinc = {
     }
 
     function renderComponent (componentName) {
-        console.log('2. render Component is called')
         const component = Zinc._components[componentName];
         const nodeList = document.querySelectorAll(componentName);
         nodeList.forEach( (node) => {
@@ -40,26 +38,17 @@ const Zinc = {
         });
     }
     
-    function renderComponents() {
-        console.log('renderComponents is called');
-        Object.values(Zinc._components).forEach((component) => {
-            console.log(component);
-        });
-    }
-    
     //this function will now take one config object instead of 4 arguments
-    Zinc.registerComponent = function (componentName, templateFile, data, controller) {
-        console.log('1. registerComponent is called');
-        Zinc._components[componentName] = {
-            componentName,
-            templateFile,
-            data,
-            controller
+    Zinc.registerComponent = function (configObj) {
+        Zinc._components[configObj.componentName] = {
+            componentName: configObj.componentName,
+            templateFile: configObj.templateFile,
+            data: configObj.data,
+            controller: configObj.controller
         };
-        renderComponent (componentName);
+        renderComponent (configObj.componentName);
     }
 
     function init() {
-        renderComponents();
     };   
 })();
