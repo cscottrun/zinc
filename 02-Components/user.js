@@ -12,16 +12,16 @@
     }
 
     function populateList(users) {
-        const myComponents = ['user-one', 'user-two', 'user-three', 'user-four', 'user-five'];
+        const myComponents = ['user-info'];
         for (let i = 0; i < users.length; i++) {
-            let userArguments = {
+            let userConfigObj = {
                 componentName: myComponents[i],
                 templateFile: 'user',
-                data: users[i],
+                data: users[i], //this is an object containing our user info
                 controller: onClick
             }
             //Zinc.register will now take the config object
-            Zinc.registerComponent(userArguments)
+            Zinc.registerComponent(userConfigObj)
                 
         }
     }
