@@ -4,26 +4,29 @@
 /* globals Zinc */
 
 (() => {
-    function onClick() {
+    function userController() {
         this.addEventListener('click', () => {
             this.classList.toggle('hilight');
-            this.$state.hilight = !this.$state.hilitght;
+            this.$state.hilit = !this.$state.hilit;
         });
     }
 
     function populateList(users) {
         const myComponents = ['user-info'];
         for (let i = 0; i < users.length; i++) {
-            let userConfigObj = {
-                componentName: myComponents[i],
-                templateFile: 'user',
-                data: users[i], //this is an object containing our user info
-                controller: onClick
-            }
-            //Zinc.register will now take the config object
-            Zinc.registerComponent(userConfigObj)
-                
+
+            Zinc.registerComponent({
+                name: myComponents[i],
+                templateFile: 'user-item',
+                data: users[i],
+                controller: userController
+            });
         }
+        Zinc.registerComponent({
+            name: 'user-list',
+            templateFile: 'user-list',
+        });
+        Zinc.renderComponents();
     }
 
     fetch('https://randomuser.me/api/?results=5')
