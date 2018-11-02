@@ -84,6 +84,7 @@ const Zinc = {
             templateFile,
             data,
             controller
+
         };
     };
 

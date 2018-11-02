@@ -14,12 +14,14 @@
     function populateList(users) {
         const myComponents = ['user-info'];
         for (let i = 0; i < users.length; i++) {
+
             Zinc.registerComponent({
                 name: myComponents[i],
                 templateFile: 'user-item',
                 data: users[i],
                 controller: userController
             });
+
         }
         Zinc.registerComponent({
             name: 'user-list',
